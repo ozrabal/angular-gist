@@ -1,7 +1,13 @@
+
 <app-header></app-header>
 
 <app-gist-list></app-gist-list>
 
-<app-gist-content></app-gist-content>
+<router-outlet></router-outlet>
 
 <app-footer></app-footer>
+
+<ul>
+    <li><a [routerLink]="['/login']">login</a></li>
+    <li><a [routerLink]="['/gist/10']">gist</a></li>
+</ul>
