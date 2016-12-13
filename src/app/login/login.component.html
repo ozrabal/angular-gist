@@ -1,5 +1,15 @@
-<form #f="ngForm" (ngSubmit)="onLogin(f.value)" >
-  <input type="text" placeholder="username" ngControl="email">
-  <input type="password" placeholder="password" ngControl="password">
-  <button type="submit">Submit</button>
-</form>
+<div class="login jumbotron center-block">
+    <h1>Login</h1>
+    <form role="form" (submit)="login(username.value, password.value)">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" #username class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" #password class="form-control" id="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a [routerLink]="['/signup']">Click here to Signup</a>
+    </form>
+</div>

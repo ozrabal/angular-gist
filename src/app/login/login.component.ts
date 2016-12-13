@@ -9,9 +9,9 @@ interface Credentials{
 
 @Component({
   selector: 'app-login',
-    template: `..`
- /* templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']*/
+    //template: `..`
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 

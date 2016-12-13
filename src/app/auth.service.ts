@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-
+import 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
@@ -13,11 +13,14 @@ export class AuthService {
   }
 
     login(email, password){
-
+console.log('login');
+        event.preventDefault();
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
 
-        return this.http.post( 'https://my-app.com/api/authenticate', JSON.stringify({email, password}), { headers })
+        return this.http.post( 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=bb3edde8cc2bac83091f',
+            JSON.stringify({email, password}),
+            { headers })
             .map(res => res.json())
             .map((res) => {
                 if(res.success){
