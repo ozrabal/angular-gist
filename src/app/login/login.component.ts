@@ -40,38 +40,75 @@ if(!localStorage.getItem('access_token')){
         this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
                 headers: headers
             })
-            .map(res => res.json() )
+            .map(response => response.json() )
             .subscribe(
+                function(response) { console.log("Success Response" + response)},
+                function(error) { console.log("1Error happened" + error)},
+                function() { console.log("the subscription is completed")}
+            );
+            /*.map((response) => {
+                console.log(response);
+                localStorage.setItem('access_token', response);
+                if (response.success) {
+                    localStorage.setItem('auth_token', response.auth_token);
+                   // this.loggedIn = true;
+                }
+
+                return response.success;
+            });*/
+            /*.subscribe(
                 // We're assuming the response will be an object
                 // with the JWT on an id_token key
-                data => localStorage.setItem('access_token', data.access_token),
-                error => console.log(error)
-            );
+                response => {
+
+                    localStorage.setItem('access_token', 'd');},
+                error => console.log(error),
+                complete => {console.log(response);}
+            );*/
     }
-}
+    }
 
     }
 
 
 
   constructor( private authService: AuthService, private router: Router, private route: ActivatedRoute, public http: Http) {
-
+      this.http = http;
 
   }
 
-    onSubmit(email, password){
+    /*onSubmit(email, password){
         this.authService.login(email, password).subscribe((result) => {
             if(result){
                 this.router.navigate(['']);
             }
         })
-    }
+    }*/
 
-    login(event, username, password) {
+    zlogin(event, username, password) {
+
+        //token save
+        console.log(this.route.snapshot.queryParams['code']);
+        //localStorage.setItem('access_token', this.route.snapshot.queryParams['access_token']);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        //headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+        headers.append('Accept', 'application/json');
+
+        let v = 'client_id=&client_secret=&code='+this.route.snapshot.queryParams['code'];
 
 
+        this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
+            headers: headers
+        })
+            .map(response => response.json() )
+            .subscribe(
+                function(response) { console.log("Success Response" + response)},
+                function(error) { console.log("Error happened" + error)},
+                function() { console.log("the subscription is completed")}
+            );
 
-        event.preventDefault();
+        /*event.preventDefault();
         let body = JSON.stringify({ username, password });
         this.http.get('')
             .subscribe(
@@ -83,7 +120,7 @@ if(!localStorage.getItem('access_token')){
                     alert(error.text());
                     console.log(error.text());
                 }
-            );
+            );*/
     }
 
 
