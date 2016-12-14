@@ -18,7 +18,7 @@ console.log('login');
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
 
-        return this.http.post( 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=bb3edde8cc2bac83091f',
+        /*return this.http.post( 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=',
             JSON.stringify({email, password}),
             { headers })
             .map(res => res.json())
@@ -28,7 +28,7 @@ console.log('login');
                     this.loggedIn = true;
                 }
                 return res.success;
-            });
+            });*/
 
         /*console.log(credentials);
         this.http.post('https://my-app.com/api/authenticate', credentials)

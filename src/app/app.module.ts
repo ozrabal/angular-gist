@@ -17,7 +17,8 @@ import { AuthService } from './auth.service';
 
 const appRoutes:Routes = [
     { path: 'gist/:id', component: GistContentComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+  { path: 'login/code', component: LoginComponent }
 ];
 
 @NgModule({
