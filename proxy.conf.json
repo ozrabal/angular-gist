@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://github.com/login/oauth/access_token",
+    "secure": false
+  }
+}

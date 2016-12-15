@@ -24,7 +24,7 @@ if(!localStorage.getItem('access_token')){
 
 
     if(!this.route.snapshot.queryParams['code']) {
-        window.location.href = 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=';
+        window.location.href = 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=f63ef0cba4f0757d893e';
     }else{
         //token save
         console.log(this.route.snapshot.queryParams['code']);
@@ -34,15 +34,19 @@ if(!localStorage.getItem('access_token')){
         //headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
         headers.append('Accept', 'application/json');
 
-        let v = 'client_id=&client_secret=&code='+this.route.snapshot.queryParams['code'];
+        //let v = 'client_id=f63ef0cba4f0757d893e&client_secret=6837362f8fbe5ab444837a20e1599e4d62cef5c1&code='+this.route.snapshot.queryParams['code'];
+        let vv = this.route.snapshot.queryParams['code'];
 
 
-        this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
+        //this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
+        this.http.post('http://localhost:3000/api/token/'+vv,  '',{
                 headers: headers
             })
             .map(response => response.json() )
             .subscribe(
-                function(response) { console.log("Success Response" + response)},
+                function(response) { console.log("Success Response" + response)
+                    localStorage.setItem('access_token', response.access_token);
+                },
                 function(error) { console.log("1Error happened" + error)},
                 function() { console.log("the subscription is completed")}
             );
@@ -95,10 +99,12 @@ if(!localStorage.getItem('access_token')){
         //headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
         headers.append('Accept', 'application/json');
 
-        let v = 'client_id=&client_secret=&code='+this.route.snapshot.queryParams['code'];
+        //let v = 'client_id=f63ef0cba4f0757d893e&client_secret=6837362f8fbe5ab444837a20e1599e4d62cef5c1&code='+this.route.snapshot.queryParams['code'];
+        let v = this.route.snapshot.queryParams['code'];
 
 
-        this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
+        this.http.post('http://localhost:3000/api/token/'+v,  '',{
+        //this.http.post('https://github.com/login/oauth/access_token?'+v,  '',{
             headers: headers
         })
             .map(response => response.json() )
