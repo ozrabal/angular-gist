@@ -34,3 +34,4 @@ testem.log
 .DS_Store
 Thumbs.db
 app.config.json
+/app.config.json
