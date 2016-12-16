@@ -1,3 +1,4 @@
+import { APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,9 +16,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth.guard';
 
+import { AppConfig } from './config/app.config';
+
 const appRoutes:Routes = [
-    //{ path: '', redirectTo: 'gists',pathMatch: 'full'},
-    { path: '',component: AppComponent, canActivate: [AuthGuard],pathMatch: 'full' },
+    { path: '',component: AppComponent, canActivate: [AuthGuard], pathMatch: 'full' },
     { path: 'gist/:id', component: GistContentComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/code', component: LoginComponent }
@@ -37,9 +39,19 @@ const appRoutes:Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-      RouterModule.forRoot(appRoutes,{ useHash: false })
+    RouterModule.forRoot(appRoutes,{ useHash: false })
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+      AuthService,
+      AuthGuard,
+      AppConfig,
+      {
+        provide: APP_INITIALIZER,
+        useFactory: (config: AppConfig) => () => config.load(),
+        deps: [AppConfig],
+        multi: true
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
