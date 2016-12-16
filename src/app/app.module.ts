@@ -13,12 +13,14 @@ import { GistContentComponent } from './gist-content/gist-content.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
-
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes:Routes = [
+    //{ path: '', redirectTo: 'gists',pathMatch: 'full'},
+    { path: '',component: AppComponent, canActivate: [AuthGuard],pathMatch: 'full' },
     { path: 'gist/:id', component: GistContentComponent },
     { path: 'login', component: LoginComponent },
-  { path: 'login/code', component: LoginComponent }
+    { path: 'login/code', component: LoginComponent }
 ];
 
 @NgModule({
@@ -35,9 +37,9 @@ const appRoutes:Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes,{ useHash: false })
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

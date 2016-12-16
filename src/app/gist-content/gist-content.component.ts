@@ -3,8 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-gist-content',
-  templateUrl: './gist-content.component.html',
-  styleUrls: ['./gist-content.component.scss']
+  templateUrl: './gist-content.component.html'
 })
 export class GistContentComponent implements OnInit {
     id: number;
