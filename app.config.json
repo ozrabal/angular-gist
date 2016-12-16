@@ -1,8 +1,0 @@
-{
-  "API": {
-    "CLIENT_ID": "f63ef0cba4f0757d893e",
-    "GITHUB_CLIENT_SECRET": "6837362f8fbe5ab444837a20e1599e4d62cef5c1",
-    "GITHUB_OAUTH_TOKEN_URL": "https://github.com/login/oauth/access_token",
-    "GITHUB_AUTH_URL": "https://github.com/login/oauth/authorize?scope=user:email gist&client_id="
-  }
-}
