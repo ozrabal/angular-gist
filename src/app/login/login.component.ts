@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit{
         headers.append('Accept', 'application/json');
 
         let vv = this.route.snapshot.queryParams['code'];
-
+let that = this;
         //PROXY_OAUTH_TOKEN_URL
         //this.http.post('http://localhost:3000/api/token/'+vv,  '',{
         this.http.post(API.PROXY_OAUTH_TOKEN_URL + vv,  '',{
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit{
                 function(response) { console.log("Success Response" + response)
                     localStorage.setItem('access_token', response.access_token);
                     console.log(this);
+                    that.router.navigate(['']);
                    return true;
                 },
                 function(error) { console.log("1Error happened" + error)},
@@ -54,14 +55,14 @@ export class LoginComponent implements OnInit{
             );
 
 
-                this.router.navigate(['']);
+
     }
     }else{
     //        console.log(this.router);
       //      this.router.navigate(['']);
 
         }
-        this.router.navigate(['']);
+        //this.router.navigate(['']);
 
     }
 

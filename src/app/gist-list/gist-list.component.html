@@ -1,4 +1,6 @@
-<p>
-  gist-list works!
-</p>
-<app-gist-list-item></app-gist-list-item>
+{{ user }}
+<ol>
+  <li *ngFor="let item of items" class="post">
+    <span class="item-block"><a [routerLink]="['/gist/'+item.id]">{{ item.description }}</a></span>
+  </li>
+</ol>

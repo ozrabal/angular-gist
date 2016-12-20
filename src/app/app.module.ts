@@ -15,12 +15,14 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { GithubApiService } from './github-api.service';
 
 import { AppConfig } from './config/app.config';
 
 const appRoutes:Routes = [
-    { path: '',component: AppComponent, canActivate: [AuthGuard], pathMatch: 'full' },
-    { path: 'gist/:id', component: GistContentComponent },
+    //{ path: '',component: AppComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+    { path: 'gists', component: GistListComponent, canActivate: [AuthGuard]},
+    { path: 'gist/:id', component: GistContentComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'login/code', component: LoginComponent }
 ];
@@ -45,6 +47,7 @@ const appRoutes:Routes = [
       AuthService,
       AuthGuard,
       AppConfig,
+      GithubApiService,
       {
         provide: APP_INITIALIZER,
         useFactory: (config: AppConfig) => () => config.load(),
