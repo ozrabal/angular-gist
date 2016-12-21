@@ -1,20 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GithubApiService } from '../github-api.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-gist-content',
-  templateUrl: './gist-content.component.html'
+  templateUrl: './gist-content.component.html',
+    inputs: ['gistId']
 })
 export class GistContentComponent implements OnInit {
-    id: number;
+    id;
 gist: Object;
+    params: Params;
+
+
   constructor(private route: ActivatedRoute, private router: Router, private _apiService: GithubApiService) {
 
   }
 
   ngOnInit() {
+
+      this.id = this.route.params.subscribe(params => {
+          this.id = params['id']; // (+) converts string 'id' to a number
+          console.log('id', this.id);
+          // In a real app: dispatch action to load the details here.
+      });
+
       console.log(this.route.snapshot.params['id']);
       this.id = this.route.snapshot.params['id'];
 
