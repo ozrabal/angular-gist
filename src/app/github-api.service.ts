@@ -26,4 +26,13 @@ export class GithubApiService {
         .map(response => response.json() );
   }
 
+    getGist(id:string):Observable<any>{
+
+        return this.http.get('https://api.github.com/gists/'+id, {
+            headers: this._headers
+        })
+            .map(response => response.json());
+
+    }
+
 }
